@@ -51,6 +51,7 @@ complete -c mvn -o X -l debug                             -d "Produce execution 
 #default properties for some plugins / profiles
 complete -c mvn -o DskipTests                             -d "Skipping JUnit Tests"
 complete -c mvn -o DbuildInstaller                        -d "Build installer (if profile is available in project)"
+complete -c mvn -o DperformRelease                        -d "Use release profile (create javadoc and attach sources)"
 
 
 #
