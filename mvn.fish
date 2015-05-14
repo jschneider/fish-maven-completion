@@ -1,5 +1,10 @@
+#!fish
 # Maven fish auto completion
 #
+#
+# Install file by copying to ~/.config/fish/completions/mvn.fish
+
+
 # Default lifecycle
 complete -c mvn -a 'pre-clean clean post-clean validate initialize generate-sources process-sources generate-resources process-resources compile process-classes generate-test-sources process-test-sources generate-test-resources process-test-resources test-compile process-test-classes testprepare-package package pre-integration-test integration-test post-integration-test verify install deploy pre-site site post-site site-deploy'
 # JGitflow/Release related plugins
@@ -43,6 +48,6 @@ complete -c mvn -o V -l show-version                      -d "Display version in
 complete -c mvn -o v -l version                           -d "Display version information"
 complete -c mvn -o X -l debug                             -d "Produce execution debug output"
 
-#default properties for some plugins
+#default properties for some plugins / profiles
 complete -c mvn -o DskipTests                             -d "Skipping JUnit Tests"
 complete -c mvn -o DbuildInstaller                        -d "Build installer (if profile is available in project)"
