@@ -48,21 +48,21 @@ complete -c mvn -o v -l version                           -d "Display version in
 complete -c mvn -o X -l debug                             -d "Produce execution debug output"
 
 
+#
+#
+# Profiles
+#
+#
 function __fish_mvn_profiles_from_settings
-
-end
-
-function __grepSettingsProfiles
   grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
 end
 
-function __grepLocalProfiles
+#TODO search all pom.xml files in current subtree
+function __fish_mvn_profiles_from_pom
   [ -e pom.xml ]; and grep -e "<profile>" -A 1 pom.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
 end
 
-
-# Profiles
-complete -c mvn -o P -l activate-profiles -a "(__grepSettingsProfiles) (__grepLocalProfiles)"    -d "Comma-delimited list of profiles to activate"
+complete -c mvn -o P -l activate-profiles -a "(__fish_mvn_profiles_from_pom) (__fish_mvn_profiles_from_settings)"    -d "Comma-delimited list of profiles to activate"
 
 
 #default properties for some plugins / profiles
