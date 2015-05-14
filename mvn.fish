@@ -52,13 +52,17 @@ function __fish_mvn_profiles_from_settings
 
 end
 
-function __grepLocalProfiles
+function __grepSettingsProfiles
   grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
+end
+
+function __grepLocalProfiles
+  [ -e pom.xml ]; and grep -e "<profile>" -A 1 pom.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
 end
 
 
 # Profiles
-complete -c mvn -o P -l activate-profiles -a "(__grepLocalProfiles)"    -d "Comma-delimited list of profiles to activate"
+complete -c mvn -o P -l activate-profiles -a "(__grepSettingsProfiles) (__grepLocalProfiles)"    -d "Comma-delimited list of profiles to activate"
 
 
 #default properties for some plugins / profiles
