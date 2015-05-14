@@ -7,8 +7,6 @@
 
 # Default lifecycle
 complete -c mvn -f -a 'pre-clean clean post-clean validate initialize generate-sources process-sources generate-resources process-resources compile process-classes generate-test-sources process-test-sources generate-test-resources process-test-resources test-compile process-test-classes testprepare-package package pre-integration-test integration-test post-integration-test verify install deploy pre-site site post-site site-deploy'
-# JGitflow/Release related plugins
-complete -c mvn -f -a 'nexus-staging:release jgitflow:release-start jgitflow:release-finish'
 
 # All options form git --help
 complete -c mvn -f -o am -l also-make                        -d "If project list is specified, also build projects required by the list"
@@ -78,6 +76,7 @@ complete -c mvn -o Dmaven.javadoc.skip                  -d "Skip Javadoc generat
 
 
 # More plugins
+complete -c mvn -f -a 'nexus-staging:release jgitflow:release-start jgitflow:release-finish'
 complete -c mvn -a "appengine:backends_configure appengine:backends_delete appengine:backends_rollback appengine:backends_start appengine:backends_stop appengine:backends_update appengine:debug appengine:devserver appengine:devserver_start appengine:devserver_stop appengine:endpoints_get_client_lib appengine:endpoints_get_discovery_doc appengine:enhance appengine:rollback appengine:set_default_version appengine:start_module_version appengine:stop_module_version appengine:update appengine:update_cron appengine:update_dos appengine:update_indexes appengine:update_queues appengine:vacuum_indexes"
 complete -c mvn -a "android:apk android:apklib android:clean android:deploy android:deploy-dependencies android:dex android:emulator-start android:emulator-stop android:emulator-stop-all android:generate-sources android:help android:instrument android:manifest-update android:pull android:push android:redeploy android:run android:undeploy android:unpack android:version-update android:zipalign android:devices"
 complete -c mvn -a "ant:ant ant:clean"
