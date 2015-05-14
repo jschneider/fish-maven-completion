@@ -35,7 +35,6 @@ complete -c mvn -o npr -l no-plugin-registry              -d "Ineffective, only 
 complete -c mvn -o npu -l no-plugin-updates               -d "Ineffective, only kept for backward compatibility"
 complete -c mvn -o nsu -l no-snapshot-updates             -d "Suppress SNAPSHOT updates"
 complete -c mvn -o o -l offline                           -d "Work offline"
-complete -c mvn -o P -l activate-profiles           -d "Comma-delimited list of profiles to activate"
 complete -c mvn -o pl -l projects                   -d "Comma-delimited list of specified reactor projects to build instead of all projects. A project can be specified by [groupId]:artifactId or by its relative path."
 complete -c mvn -o q -l quiet                             -d "Quiet output - only show errors"
 complete -c mvn -o rf -l resume-from                -d "Resume reactor from specified project"
@@ -47,6 +46,20 @@ complete -c mvn -o up -l update-plugins                   -d "Ineffective, only 
 complete -c mvn -o V -l show-version                      -d "Display version information WITHOUT stopping build"
 complete -c mvn -o v -l version                           -d "Display version information"
 complete -c mvn -o X -l debug                             -d "Produce execution debug output"
+
+
+function __fish_mvn_profiles_from_settings
+
+end
+
+function __grepLocalProfiles
+  grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
+end
+
+
+# Profiles
+complete -c mvn -o P -l activate-profiles -a "(__grepLocalProfiles)"    -d "Comma-delimited list of profiles to activate"
+
 
 #default properties for some plugins / profiles
 complete -c mvn -o DskipTests                             -d "Skipping JUnit Tests"
@@ -117,3 +130,4 @@ complete -c mvn -a"war:war war:exploded war:inplace war:manifest"
 complete -c mvn -a"spring-boot:run spring-boot:repackage"
 complete -c mvn -a"jgitflow:feature-start jgitflow:feature-finish jgitflow:release-start jgitflow:release-finish jgitflow:hotfix-start jgitflow:hotfix-finish jgitflow:build-number"
 complete -c mvn -a"wildfly:add-resource wildfly:deploy wildfly:deploy-only wildfly:deploy-artifact wildfly:redeploy wildfly:redeploy-only wildfly:undeploy wildfly:undeploy-artifact wildfly:run wildfly:start wildfly:shutdown wildfly:execute-commands"
+
