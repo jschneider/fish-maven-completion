@@ -54,7 +54,7 @@ function __fish_mvn_profiles_from_settings
   grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
 end
 
-#TODO search all pom.xml files in current subtree
+#TODO search pom.xml hierarchy
 function __fish_mvn_profiles_from_pom
   [ -e pom.xml ]; and grep -e "<profile>" -A 1 pom.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g'
 end
